@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CosmosDBDemo.Models;
 using CosmosDBDemo.Services;
@@ -30,12 +28,15 @@ namespace CosmosDBDemo.Controllers
             try
             {
                 pedido.Id = Guid.NewGuid().ToString();
-                await _cosmosDbService.Novo(pedido);
-                return Ok();
+                var criouComSucesso = await _cosmosDbService.Novo(pedido);
+                if (criouComSucesso)
+                    return Ok();
+
+                return Forbid();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return BadRequest(e);
+                return Forbid();
             }
         }
     }

@@ -10,7 +10,7 @@ namespace CosmosDBDemo.Services
     {
         Task<IEnumerable<Pedido>> Query(string query);
         Task<Pedido> PorId(string id);
-        Task Novo(Pedido item);
+        Task<bool> Novo(Pedido item);
         Task Atualizar(string id, Pedido item);
         Task Apagar(string id);
     }
